@@ -2,7 +2,6 @@
 <odoo>
 
     <!--How To Activate Settings From Code in Odoo-->
-    <!--  https://www.youtube.com/watch?v=mCwg-X3NfjQ&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=64 -->
     <!--<data>-->
         <!--<record model="res.config.settings" id="res_config_settings">-->
             <!--<field name="group_product_variant" eval="1"/>-->
@@ -15,7 +14,6 @@
     <!--</data>-->
 
     <!--How To Create Data Files and Load Default Data In Odoo-->
-    <!--  https://www.youtube.com/watch?v=ZyABTIDll0U&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=30  -->
     <data noupdate="1">
         <!--creating patient record from code-->
         <record id="patient_xyz" model="hospital.patient">

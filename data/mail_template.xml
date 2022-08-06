@@ -2,8 +2,6 @@
 <odoo>
 
     <!--Creating Email Template in Odoo-->
-    <!-- https://www.youtube.com/watch?v=rGfGHRS3iWw&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=43  -->
-    <!-- https://www.youtube.com/watch?v=CZVRmtv6re0&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=44  -->
     <data noupdate="1">
         <record id="patient_card_email_template" model="mail.template">
             <field name="name">Patient Card: Send by email</field>

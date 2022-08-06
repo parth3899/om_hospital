@@ -27,7 +27,7 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="Dashboard">
-                <board style="1-2">
+                <board style="2-1">
                     <column>
                         <action
                             string="Patient Appointments"

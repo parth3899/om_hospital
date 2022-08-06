@@ -8,7 +8,6 @@ class ResPartners(models.Model):
     _inherit = 'res.partner'
 
     # How to OverRide Create Method Of a Model
-    # https://www.youtube.com/watch?v=AS08H3G9x1U&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=26
     @api.model
     def create(self, vals_list):
         res = super(ResPartners, self).create(vals_list)
@@ -18,7 +17,6 @@ class ResPartners(models.Model):
 
 
 # Inheriting the Sale Order Model and Adding New Field
-# https://www.youtube.com/watch?v=z1Tx7EGkPy0&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=9
 class SaleOrderInherit(models.Model):
     _inherit = 'sale.order'
 
@@ -39,20 +37,15 @@ class HospitalPatient(models.Model):
     _rec_name = 'patient_name'
 
     # Print PDF Report From Button Click in Form
-    # https://www.youtube.com/watch?v=Dc8GDj7ygsI&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=67
-    # @api.multi
     def print_report(self):
         return self.env.ref('om_hospital.report_patient_card').report_action(self)
 
     # Function which is executed using the Cron Job/ Scheduled Action
-    # https://www.youtube.com/watch?v=_P_AVSNr6uU&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=52
     @api.model
     def test_cron_job(self):
         print("Abcd")# print will get printed in the log of pycharm
         #code accordingly to execute the cron
 
-    # https://www.youtube.com/watch?v=-1r3WSwtqxQ
-    # @api.multi
     def name_get(self):
         # name get function for the model executes automatically
         res = []
@@ -68,7 +61,6 @@ class HospitalPatient(models.Model):
         return super(HospitalPatient, self).search(domain, limit=limit).name_get()
 
     # Add Constrains For a Field
-    # https://www.youtube.com/watch?v=ijS-N1CdiWU&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=14
     @api.constrains('identification_id')
     def check_identification_id(self):
         for rec in self:
@@ -76,8 +68,6 @@ class HospitalPatient(models.Model):
                 raise ValidationError(_('Must be 11 Characters'))
 
     # Action For Smart Button
-    # https://www.youtube.com/watch?v=I93Lr-bprIc&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=19
-    # @api.multi
     def open_patient_appointments(self):
         return {
             'name': _('Appointments'),
@@ -94,7 +84,6 @@ class HospitalPatient(models.Model):
         self.appointment_count = count
 
     # How to Write Onchange Functions
-    # https://www.youtube.com/watch?v=qyRhjyp1MeE&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=39
     @api.onchange('doctor_id')
     def set_doctor_gender(self):
         for rec in self:
@@ -102,7 +91,6 @@ class HospitalPatient(models.Model):
                 rec.doctor_gender = rec.doctor_id.gender
 
     # Sending Email in Button Click
-    # https://www.youtube.com/watch?v=CZVRmtv6re0&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=44
     def action_send_card(self):
         # sending the patient report to patient via email
         template_id = self.env.ref('om_hospital.patient_card_email_template').id
@@ -110,7 +98,6 @@ class HospitalPatient(models.Model):
         template.send_mail(self.id, force_send=True)
 
     # compute function in Odoo
-    # https://www.youtube.com/watch?v=Mg80GxrKDOc&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=11
     @api.depends('patient_name')
     def _compute_upper_name(self):
         for rec in self:
@@ -125,14 +112,11 @@ class HospitalPatient(models.Model):
                 else:
                     rec.age_group = 'major'
 
-    # Making compute field editable using inverse function
-    # https://www.youtube.com/watch?v=NEr6hUTrn84&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=47
     def _inverse_upper_name(self):
         for rec in self:
             rec.patient_name = rec.patient_name_upper.lower() if rec.patient_name_upper else False
 
     # Overriding the create method to assign sequence for the record
-    # https://www.youtube.com/watch?v=ZfKzmfiqeg0&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=8
     @api.model
     def create(self, vals):
         if vals.get('name_seq', _('New')) == _('New'):
@@ -147,7 +131,7 @@ class HospitalPatient(models.Model):
         for rec in self:
             rec.xml_id = res.get(rec.id)
 
-    name = fields.Char(string="Contact Number")
+    name = fields.Char(string="Name")
     name_seq = fields.Char(string='Patient ID', required=True, copy=False, readonly=True,
                            index=True, default=lambda self: _('New'))
     gender = fields.Selection([
@@ -160,7 +144,7 @@ class HospitalPatient(models.Model):
     ], string="Age Group", compute='set_age_group', store=True)
     patient_name = fields.Char(string='Name', required=True,  track_visibility="always")
     patient_age = fields.Integer('Age', track_visibility="always", group_operator=False)
-    patient_age2 = fields.Float(string="Age2")
+    # patient_age2 = fields.Float(string="Age2")
     notes = fields.Text(string="Registration Note")
     image = fields.Binary(string="Image", attachment=True)
     appointment_count = fields.Integer(string='Appointment', compute='get_appointment_count')

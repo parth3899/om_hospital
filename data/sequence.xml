@@ -2,7 +2,6 @@
 <odoo>
 
     <!--Adding New Sequence For A Field-->
-    <!--  https://www.youtube.com/watch?v=ZfKzmfiqeg0&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=8  -->
     <data noupdate="1">
         <!-- Sequences for hospital.patient -->
         <record id="seq_hospital_patient" model="ir.sequence">

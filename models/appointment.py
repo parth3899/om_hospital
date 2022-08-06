@@ -144,7 +144,17 @@ class HospitalAppointment(models.Model):
 
 
 
+    def action_confirm(self):
+        self.state = 'confirm'
 
+    def action_done(self):
+        self.state = 'done'
+
+    def action_draft(self):
+        self.state = 'draft'
+
+    def action_cancel(self):
+        self.state = 'cancel'
 
 
             # rec.state = 'confirm'
@@ -154,7 +164,6 @@ class HospitalAppointment(models.Model):
             rec.state = 'done'
 
     # Overriding the Create Method in Odoo
-    # https://www.youtube.com/watch?v=ZfKzmfiqeg0&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=8
     @api.model
     def create(self, vals):
         # overriding the create method to add the sequence
@@ -164,8 +173,6 @@ class HospitalAppointment(models.Model):
         return result
 
     # How to Override the Write Method in Odoo
-    # https://www.youtube.com/watch?v=v8sXFUi1SH4&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=50
-    # @api.multi
     def write(self, vals):
         # overriding the write method of appointment model
         res = super(HospitalAppointment, self).write(vals)
@@ -175,7 +182,6 @@ class HospitalAppointment(models.Model):
 
     # Give Domain For A field dynamically in Onchange
     # How To Give Domain For A Field Based On Another Field
-    # https://www.youtube.com/watch?v=IpXXYCsK2ow&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=65
     @api.onchange('partner_id')
     def onchange_partner_id(self):
         for rec in self:
@@ -188,7 +194,17 @@ class HospitalAppointment(models.Model):
         res['patient_id'] = 1
         res['notes'] = 'please like the video'
         return res
+    def unlink(self):
+        if self.state == 'done':
+            raise ValidationError(_("You Cannot Delete %s as it is in Done State" % self.name))
+        return super(HospitalAppointment, self).unlink()
 
+    def action_url(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'target': 'new',
+            'url': 'https://apps.odoo.com/apps/modules/14.0/%s/' % self.prescription,
+        }
     name = fields.Char(string='Appointment ID', required=True, copy=False, readonly=True,
                        index=True, default=lambda self: _('New'))
     patient_id = fields.Many2one('hospital.patient', string='Patient', required=True)
@@ -197,7 +213,6 @@ class HospitalAppointment(models.Model):
     notes = fields.Text(string="Registration Note")
     doctor_note = fields.Text(string="Note", track_visibility='onchange')
     # How to Create One2Many Field
-    # https://www.youtube.com/watch?v=_O_tNBdg3HQ&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=34
     appointment_lines = fields.One2many('hospital.appointment.lines', 'appointment_id', string='Appointment Lines')
     pharmacy_note = fields.Text(string="Note", track_visibility='always')
     appointment_date = fields.Date(string='Date')
