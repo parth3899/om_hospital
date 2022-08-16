@@ -20,7 +20,7 @@
             <field name="patient_name">Odoo Mates</field>
             <field name="patient_age">25</field>
             <field name="name">9876543210</field>
-            <field name="gender">fe_male</field>
+            <field name="gender">female</field>
             <field name="notes">Your Odoo Mate</field>
         </record>
 
