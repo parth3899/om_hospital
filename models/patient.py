@@ -136,7 +136,7 @@ class HospitalPatient(models.Model):
                            index=True, default=lambda self: _('New'))
     gender = fields.Selection([
         ('male', 'Male'),
-        ('fe_male', 'Female'),
+        ('female', 'Female'),
     ], default='male', string="Gender")
     age_group = fields.Selection([
         ('major', 'Major'),
@@ -154,7 +154,8 @@ class HospitalPatient(models.Model):
     user_id = fields.Many2one('res.users', string="PRO")
     doctor_gender = fields.Selection([
         ('male', 'Male'),
-        ('fe_male', 'Female'),
+        ('female', 'Female'),
+        ('other', 'Other'),
     ], string="Doctor Gender")
     patient_name_upper = fields.Char(compute='_compute_upper_name', inverse='_inverse_upper_name')
     company_id = fields.Many2one('res.company', required=True, default=lambda self: self.env.user.company_id)

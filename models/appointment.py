@@ -216,7 +216,7 @@ class HospitalAppointment(models.Model):
     appointment_lines = fields.One2many('hospital.appointment.lines', 'appointment_id', string='Appointment Lines')
     pharmacy_note = fields.Text(string="Note", track_visibility='always')
     appointment_date = fields.Date(string='Date')
-    appointment_datetime = fields.Datetime(string='Date Time')
+    appointment_datetime = fields.Datetime(string='Time')
     partner_id = fields.Many2one('res.partner', string="Customer")
     order_id = fields.Many2one('sale.order', string="Sale Order")
     amount = fields.Float(string="Total Amount")

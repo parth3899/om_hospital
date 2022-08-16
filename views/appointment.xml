@@ -149,7 +149,7 @@
     </record>
 
     <record id="action_all_appointment" model="ir.actions.act_window">
-        <field name="name">Appointments</field>
+        <field name="name">All Appointments</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">tree,form</field>
@@ -162,7 +162,7 @@
     </record>
 
     <record id="action_appointment_draft" model="ir.actions.act_window">
-        <field name="name">Drafts</field>
+        <field name="name">Drafted Appointments</field>
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('state','=','draft')]</field>
@@ -174,7 +174,7 @@
     </record>
 
     <record id="action_appointment_cancel" model="ir.actions.act_window">
-        <field name="name">Cancel</field>
+        <field name="name">Cancelled Appointments</field>
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('state','=','cancel')]</field>
@@ -186,7 +186,7 @@
     </record>
 
     <record id="action_appointment_done" model="ir.actions.act_window">
-        <field name="name">Done</field>
+        <field name="name">Done Appointments </field>
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('state','=','done')]</field>
@@ -198,7 +198,7 @@
     </record>
 
     <record id="action_appointment_confirm" model="ir.actions.act_window">
-        <field name="name">Confirm</field>
+        <field name="name">Confirm Appointments</field>
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('state','=','confirm')]</field>
@@ -210,9 +210,9 @@
     </record>
 
     <menuitem id="hospital_root" name="Hospital" web_icon="om_hospital,static/description/icon.png"/>
-    <menuitem id="hospital_appointment" name="Appointments123" parent="hospital_root" action="action_appointment" />
+    <menuitem id="hospital_appointment" name="Appointments" parent="hospital_root" action="action_appointment" />
     <menuitem id="all_hospital_appointment" name="All Appointments" parent="hospital_appointment" action="action_all_appointment"/>
-    <menuitem id="draft_hospital_appointment" name="Drafts Appointments" parent="hospital_appointment" action="action_appointment_draft"/>
+    <menuitem id="draft_hospital_appointment" name="Draft Appointments" parent="hospital_appointment" action="action_appointment_draft"/>
     <menuitem id="cancel_hospital_appointment" name="Cancel Appointments" parent="hospital_appointment" action="action_appointment_cancel" />
     <menuitem id="done_hospital_appointment" name="Done Appointments" parent="hospital_appointment" action="action_appointment_done" />
     <menuitem id="confirm_hospital_appointment" name="Confirm Appointments" parent="hospital_appointment" action="action_appointment_confirm" />
