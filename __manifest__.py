@@ -28,6 +28,7 @@
         'views/settings.xml',
         'views/portal_template.xml',
         'views/dashboard.xml',
+        'views/invoice.xml',
         'reports/patient_card.xml',
         'reports/report.xml',
         'reports/sale_report_inherit.xml',
